@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>サンプルページ</title>
+</head>
+<body>
+<nav>
+    <h1>WSD Sample</h1>
+    <ul>
+        <li>
+            <a href="{{ url_for("register") }}">新規登録</a>
+        </li>
+        <li>
+            ログイン
+        </li>
+    </ul>
+</nav>
+{% block body %}
+{% endblock %}
+</body>
+</html>
