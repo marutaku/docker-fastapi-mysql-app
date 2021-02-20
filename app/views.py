@@ -69,11 +69,9 @@ def create_user(username: str = Form(...), password: str = Form(...)):
     return response
 
 
-@check_login
 @app.get("/blog")
-def blog_index(request: Request, session_id=Cookie(default=None)):
-    if not session_id:
-        # ログインしていなければトップページ("/")へリダイレクト
-        return RedirectResponse("/")
+# check_loginデコレータをつけるとログインしていないユーザをリダイレクトできる
+@check_login
+def articles_index(request: Request, session_id=Cookie(default=None)):
     user_id = session.get(session_id)
     return templates.TemplateResponse("blog.html", {"request": request, "user_id": user_id})

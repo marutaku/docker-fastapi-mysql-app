@@ -9,9 +9,10 @@ CREATE TABLE app.users
 
 CREATE TABLE app.articles
 (
-    id      int(12) primary key auto_increment,
-    user_id int(12)       not null,
-    title   varchar(1000) not null,
-    body    varchar(1000) not null
+    id         int(12) primary key auto_increment,
+    user_id    int(12)       not null,
+    title      varchar(1000) not null,
+    body       varchar(1000) not null,
+    created_at datetime      not null default CURRENT_TIMESTAMP
 ) CHARACTER SET UTF8
   COLLATE utf8_general_ci;
