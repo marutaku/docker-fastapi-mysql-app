@@ -8,7 +8,6 @@ https://github.com/tiangolo/fastapi/issues/754#issuecomment-585386650
 from typing import Dict, Hashable
 from uuid import uuid4
 from cachelib.file import FileSystemCache
-from fastapi import Response
 
 from app.configs import Config
 
@@ -17,10 +16,10 @@ class Session(object):
     """
     セッション管理をするクラス
     cachelibの機能を使ってファイルによってセッションを管理する
+    セッション自体は１つの辞書っぽいもので，一番上のキーが各セッションのIDになるえ
     Flask Sessionの実装を参考に作成した
     https://github.com/fengsp/flask-session/blob/a88f07e7260ae582b0744de42e77c4625e6884ea/flask_session/sessions.py
 
-    TODO: セッションのデリート機能追加
     TODO: セッション情報を削除する機能を追加
     """
 
@@ -38,11 +37,10 @@ class Session(object):
             return {}
         return self._load_session_from_file(session_id)
 
-    def set(self, response: Response, key: str, value: Hashable, session_id: str = None) -> Response:
+    def set(self, key: str, value: Hashable, session_id: str = None) -> str:
         """
         セッションを追加する
         :param session_id: セッションId
-        :param response: ユーザに送り返すレスポンス
         :param key: 追加するセッション情報のキー
         :param value: 追加するセッション情報の値
         """
@@ -52,8 +50,15 @@ class Session(object):
         session_obj = self._load_session_from_file(session_id) or {}
         session_obj.update({key: value})
         self._save_session(session_id, session_obj)
-        response.set_cookie("session_id", session_id)
-        return response
+        return session_id
+
+    def destroy(self, session_id):
+        """
+        セッションを削除する
+        :param session_id: 削除するセッションのID
+        :return: None
+        """
+        self.cache.delete(session_id)
 
     def _load_session_from_file(self, session_id) -> Dict[str, Hashable]:
         """

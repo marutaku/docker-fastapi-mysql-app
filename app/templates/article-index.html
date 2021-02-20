@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="content">
+        <h1>投稿された記事</h1>
+        <ul>
+            {% for article in articles %}
+                <li>
+                    <a href="{{ url_for("article_detail_page", article_id=article["id"]) }}">{{ article["title"] }} </a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% if not articles %}
+            <p>投稿された記事はありません</p>
+        {% endif %}
+    </div>
+    <div>
+        <a href="{{ url_for("create_article_page") }}">記事を投稿する</a>
+    </div>
+{% endblock %}

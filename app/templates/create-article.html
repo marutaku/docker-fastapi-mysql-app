@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="content">
+        <form action="{{ url_for("post_article") }}" method="post">
+            <div>
+                <label for="title">タイトル</label>
+                <input id="title" type="text" name="title"/>
+            </div>
+            <div>
+                <label for="body">内容</label>
+                <textarea id="body" name="body" rows="20" placeholder=""></textarea>
+            </div>
+            <div>
+                <button type="submit">投稿</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
