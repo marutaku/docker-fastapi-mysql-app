@@ -2,8 +2,10 @@
 DB関連の共通処理
 !!!!ここは先生の指示があった場合のみ修正してください!!!!
 """
-from typing import List, Dict, Tuple
+from typing import List, Dict
 import pymysql.cursors
+
+from app.configs import Config
 
 
 class AbstractModel(object):
@@ -13,20 +15,17 @@ class AbstractModel(object):
     そのため，全てのモデルはこのクラスを継承する
     """
 
-    def __init__(self, host, port, username, password, db_name):
+    def __init__(self, config: Config):
         """
         初期化
-        :param host: MySQLのホスト
-        :param port: MySQLのポート
-        :param username: MySQLのユーザ名
-        :param password: MySQLのパスワード
+        :param config: アプリケーションの設定．ここにデータベースの情報も入っていることを想定
         """
+
         self.connection = pymysql.connect(
-            host=host,
-            port=port,
-            user=username,
-            password=password,
-            database=db_name,
+            host=config.mysql_host,
+            user=config.mysql_username,
+            password=config.mysql_password,
+            database=config.mysql_database,
             cursorclass=pymysql.cursors.DictCursor,
             # トランザクションをちゃんとやるならFalseにしてコードを修正
             autocommit=True
@@ -73,3 +72,6 @@ class AbstractModel(object):
         :return:
         """
         cursor.execute(sql_statement, args)
+
+    def __del__(self):
+        self.connection.close()

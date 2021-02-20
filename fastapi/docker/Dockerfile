@@ -7,4 +7,8 @@ RUN pip3 install --upgrade setuptools && \
 RUN pip3 install fastapi \
     uvicorn \
     mysqlclient \
-    pymysql
+    pymysql \
+    cachelib \
+    Jinja2 \
+    python-multipart \
+    MarkupSafe

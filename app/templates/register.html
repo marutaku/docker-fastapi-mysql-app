@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 {% block body %}
     <div class="content">
-        <form action="{{ url_for("register") }}" method="post">
+        <form action="/register" method="post">
             <div>
                 <label for="username">ユーザ名</label>
-                <input id="username" type="text"/>
+                <input id="username" type="text" name="username" value="marutaku"/>
             </div>
             <div>
                 <label for="password">パスワード</label>
-                <input id="password" type="text"/>
+                <input id="password" type="password" name="password" value="marutaku"/>
             </div>
             <div>
                 <label for="password-verify">パスワード(確認)</label>
                 <input id="password-verify" type="text"/>
             </div>
             <div>
-                <input type="submit" value="送信">
+                <button type="submit">送信</button>
             </div>
         </form>
     </div>

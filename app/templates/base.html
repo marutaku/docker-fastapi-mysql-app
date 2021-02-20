@@ -12,9 +12,12 @@
             <a href="{{ url_for("register") }}">新規登録</a>
         </li>
         <li>
-            ログイン
+            <a href="{{ url_for("index") }}">ログイン</a>
         </li>
     </ul>
+    {% if error %}
+        <p style="color: red">{{ error }}</p>
+    {% endif %}
 </nav>
 {% block body %}
 {% endblock %}
