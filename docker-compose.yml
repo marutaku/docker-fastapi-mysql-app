@@ -15,12 +15,12 @@ services:
     ports:
       - '3305:3306'
   fast_api:
-    command: ["uvicorn", "app.main:app","--reload", "--host", "0.0.0.0", "--port", "8000"]
-    # command: /bin/bash -c "uvicorn app.main:app --reload --host 0.0.0.0 --port 80"
+    command: ["uvicorn", "app.views:app","--reload", "--host", "0.0.0.0", "--port", "8000"]
+    # command: /bin/bash -c "uvicorn app.views:app --reload --host 0.0.0.0 --port 80"
     build:
       context: ./fastapi/docker
     volumes:
-      - ./fastapi/:/app
+      - ./app/:/app
     environment:
       - MYSQL_DATABASE=app
       - MYSQL_ROOT_PASSWORD=password
