@@ -2,13 +2,17 @@ version: "3"
 services:
   mysql:
     build:
-      context: ./mysql/docker
+      context: ./docker/mysql
     volumes:
-      - ./mysql/:/mysql
+      - ./docker/mysql/sqls/initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/mysql/log/:/var/log/mysql
       - db-data:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=app
       - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=app_user
+      - MYSQL_PASSWORD=user_password
+      - LC_ALL=ja_JP.UTF-8
       - TZ=Japan
     networks:
       - default
@@ -16,9 +20,9 @@ services:
       - '3305:3306'
   fast_api:
     command: ["uvicorn", "app.views:app","--reload", "--host", "0.0.0.0", "--port", "8000"]
-    # command: /bin/bash -c "uvicorn app.views:app --reload --host 0.0.0.0 --port 80"
     build:
-      context: ./fastapi/docker
+      context: ./
+      dockerfile: ./docker/fastapi/Dockerfile
     volumes:
       - ./app/:/app
     environment:
