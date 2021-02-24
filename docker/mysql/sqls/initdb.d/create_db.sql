@@ -1,4 +1,5 @@
-CREATE TABLE app.users
+USE app
+CREATE TABLE IF NOT EXISTS users
 (
     id         int(12) primary key auto_increment,
     username   varchar(100) not null,
@@ -7,7 +8,7 @@ CREATE TABLE app.users
 ) CHARACTER SET UTF8
   COLLATE utf8_general_ci;
 
-CREATE TABLE app.articles
+CREATE TABLE IF NOT EXISTS articles
 (
     id         int(12) primary key auto_increment,
     user_id    int(12)       not null,
