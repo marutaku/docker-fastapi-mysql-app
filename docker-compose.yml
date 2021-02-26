@@ -7,11 +7,8 @@ services:
       - ./docker/mysql/sqls/initdb.d:/docker-entrypoint-initdb.d
       - ./docker/mysql/log/:/var/log/mysql
       - db-data:/var/lib/mysql
-    environment:
-      - MYSQL_DATABASE=app
-      - MYSQL_ROOT_PASSWORD=password
-      - LC_ALL=ja_JP.UTF-8
-      - TZ=Japan
+    env_file:
+      - ./.webservice.env
     networks:
       - default
     ports:
@@ -23,27 +20,22 @@ services:
       dockerfile: ./docker/fastapi/Dockerfile
     volumes:
       - ./app/:/app
-    environment:
-      - MYSQL_DATABASE=app
-      - MYSQL_ROOT_PASSWORD=password
-      - TZ=Japan
+    env_file:
+      - ./.webservice.env
     ports:
       - "8000:8000"
     networks:
       - default
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    environment:
-      - PMA_HOST=mysql
-      - PMA_USER=root
-      - PMA_PASSWORD=password
+    env_file:
+      - ./.webservice.env
     ports:
       - "8080:80"
     networks:
       - default
     volumes:
       - /sessions
-
 volumes:
   db-data:
 networks:
