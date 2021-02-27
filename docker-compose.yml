@@ -7,17 +7,12 @@ services:
       - ./docker/mysql/sqls/initdb.d:/docker-entrypoint-initdb.d
       - ./docker/mysql/log/:/var/log/mysql
       - db-data:/var/lib/mysql
-    environment:
-      - MYSQL_DATABASE=app
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_USER=app_user
-      - MYSQL_PASSWORD=user_password
-      - LC_ALL=ja_JP.UTF-8
-      - TZ=Japan
+    env_file:
+      - ./.webservice.env
     networks:
       - default
     ports:
-      - '3305:3306'
+      - "3305:3306"
   fast_api:
     command: ["uvicorn", "app.views:app","--reload", "--host", "0.0.0.0", "--port", "8000"]
     build:
@@ -25,14 +20,22 @@ services:
       dockerfile: ./docker/fastapi/Dockerfile
     volumes:
       - ./app/:/app
-    environment:
-      - MYSQL_DATABASE=app
-      - MYSQL_ROOT_PASSWORD=password
-      - TZ=Japan
+    env_file:
+      - ./.webservice.env
     ports:
       - "8000:8000"
     networks:
       - default
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    env_file:
+      - ./.webservice.env
+    ports:
+      - "8080:80"
+    networks:
+      - default
+    volumes:
+      - /sessions
 volumes:
   db-data:
 networks:
