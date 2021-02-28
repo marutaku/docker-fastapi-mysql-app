@@ -97,9 +97,9 @@ def create_article_page(request: Request, session_id=Cookie(default=None)):
 @check_login
 def post_article(title: str = Form(...), body: str = Form(...), session_id=Cookie(default=None)):
     article_model = ArticleModel(config)
-    user_id = session.get(session_id)["user_id"]
+    user_id = session.get(session_id).get("user")["id"]
     article_model.create_article(user_id, title, body)
-    return RedirectResponse("/article", status_code=HTTP_302_FOUND)
+    return RedirectResponse("/articles", status_code=HTTP_302_FOUND)
 
 
 @app.get("/article/{article_id}")
