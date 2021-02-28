@@ -97,7 +97,7 @@ def create_article_page(request: Request, session_id=Cookie(default=None)):
 @check_login
 def post_article(title: str = Form(...), body: str = Form(...), session_id=Cookie(default=None)):
     article_model = ArticleModel(config)
-    user_id = session.get(session_id).get("user")["id"]
+    user_id = session.get(session_id).get("user").get("id")
     article_model.create_article(user_id, title, body)
     return RedirectResponse("/articles", status_code=HTTP_302_FOUND)
 
@@ -107,7 +107,7 @@ def post_article(title: str = Form(...), body: str = Form(...), session_id=Cooki
 def article_detail_page(request: Request, article_id: int, session_id=Cookie(default=None)):
     article_model = ArticleModel(config)
     article = article_model.fetch_article_by_id(article_id)
-    user = session.get(session_id)["user"]
+    user = session.get(session_id).get("user")
     return templates.TemplateResponse("article-detail.html", {
         "request": request,
         "article": article,
