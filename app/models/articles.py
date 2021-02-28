@@ -14,7 +14,7 @@ class ArticleModel(AbstractModel):
         :param limit: 取得する記事の数
         :return:
         """
-        sql = "SELECT * FROM articles ORDER BY created_at LIMIT %s"
+        sql = "SELECT * FROM articles ORDER BY created_at DESC LIMIT %s"
         return self.fetch_all(sql, limit)
 
     def fetch_article_by_id(self, article_id):
