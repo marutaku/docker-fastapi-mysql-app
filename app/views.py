@@ -5,6 +5,7 @@ from starlette.status import HTTP_302_FOUND
 from app.configs import Config
 from app.utilities.session import Session
 from app.models.auth import AuthModel
+from app.models.articles import ArticleModel
 from app.utilities.check_login import check_login
 
 app = FastAPI()
@@ -20,8 +21,7 @@ def index(request: Request):
     :param request: Request object
     :return:
     """
-    response = templates.TemplateResponse("index.html", {"request": request})
-    return response
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/register")
@@ -44,12 +44,13 @@ def login(request: Request, username: str = Form(...), password: str = Form(...)
     :return:
     """
     auth_model = AuthModel(config)
-    [result, user_id] = auth_model.login(username, password)
+    [result, user] = auth_model.login(username, password)
     if not result:
         # ユーザが存在しなければトップページへ戻す
         return templates.TemplateResponse("index.html", {"request": request, "error": "ユーザ名またはパスワードが間違っています"})
-    response = RedirectResponse("/blog", status_code=HTTP_302_FOUND)
-    response = session.set(response, "user_id", user_id)
+    response = RedirectResponse("/articles", status_code=HTTP_302_FOUND)
+    session_id = session.set("user", user)
+    response.set_cookie("session_id", session_id)
     return response
 
 
@@ -63,15 +64,61 @@ def create_user(username: str = Form(...), password: str = Form(...)):
     :return: 登録が完了したら/blogへリダイレクト
     """
     auth_model = AuthModel(config)
-    user_id = auth_model.create_user(username, password)
-    response = RedirectResponse(url="/blog", status_code=HTTP_302_FOUND)
-    session.set(response, "user_id", user_id)
+    auth_model.create_user(username, password)
+    user = auth_model.find_user_by_name_and_password(username, password)
+    response = RedirectResponse(url="/articles", status_code=HTTP_302_FOUND)
+    session_id = session.set("user", user)
+    response.set_cookie("session_id", session_id)
     return response
 
 
-@app.get("/blog")
+@app.get("/articles")
 # check_loginデコレータをつけるとログインしていないユーザをリダイレクトできる
 @check_login
 def articles_index(request: Request, session_id=Cookie(default=None)):
-    user_id = session.get(session_id)
-    return templates.TemplateResponse("blog.html", {"request": request, "user_id": user_id})
+    user = session.get(session_id).get("user")
+    article_model = ArticleModel(config)
+    articles = article_model.fetch_recent_articles()
+    return templates.TemplateResponse("article-index.html", {
+        "request": request,
+        "articles": articles,
+        "user": user
+    })
+
+
+@app.get("/article/create")
+@check_login
+def create_article_page(request: Request, session_id=Cookie(default=None)):
+    user = session.get(session_id).get("user")
+    return templates.TemplateResponse("create-article.html", {"request": request, "user": user})
+
+
+@app.post("/article/create")
+@check_login
+def post_article(title: str = Form(...), body: str = Form(...), session_id=Cookie(default=None)):
+    article_model = ArticleModel(config)
+    user_id = session.get(session_id).get("user").get("id")
+    article_model.create_article(user_id, title, body)
+    return RedirectResponse("/articles", status_code=HTTP_302_FOUND)
+
+
+@app.get("/article/{article_id}")
+@check_login
+def article_detail_page(request: Request, article_id: int, session_id=Cookie(default=None)):
+    article_model = ArticleModel(config)
+    article = article_model.fetch_article_by_id(article_id)
+    user = session.get(session_id).get("user")
+    return templates.TemplateResponse("article-detail.html", {
+        "request": request,
+        "article": article,
+        "user": user
+    })
+
+
+@app.get("/logout")
+@check_login
+def logout(session_id=Cookie(default=None)):
+    session.destroy(session_id)
+    response = RedirectResponse(url="/")
+    response.delete_cookie("session_id")
+    return response

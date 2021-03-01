@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="content">
+        <h2>{{ article["title"] }}</h2>
+        <p>
+            <i>投稿者: {{ article["username"] }}</i>
+        </p>
+        <p>{{ article["body"] }}</p>
+    </div>
+{% endblock %}

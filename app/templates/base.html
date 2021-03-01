@@ -7,16 +7,31 @@
 <body>
 <nav>
     <h1>WSD Sample</h1>
-    <ul>
-        <li>
-            <a href="{{ url_for("register") }}">新規登録</a>
-        </li>
-        <li>
-            <a href="{{ url_for("index") }}">ログイン</a>
-        </li>
-    </ul>
+    {% if not user %}
+        <ul>
+            <li>
+                <a href="{{ url_for("register") }}">新規登録</a>
+            </li>
+            <li>
+                <a href="{{ url_for("index") }}">ログイン</a>
+            </li>
+        </ul>
+    {% else %}
+        <h3>ようこそ{{ user["username"] }}さん</h3>
+        <ul>
+            <li>
+                <a href="{{ url_for("articles_index") }}">記事一覧</a>
+            </li>
+            <li>
+                <a href="{{ url_for("logout") }}" methods="post"> ログアウト </a>
+            </li>
+        </ul>
+    {% endif %}
     {% if error %}
         <p style="color: red">{{ error }}</p>
+    {% endif %}
+    {% if information %}
+        <p style="color: cornflowerblue">{{ information }}</p>
     {% endif %}
 </nav>
 {% block body %}
