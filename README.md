@@ -22,3 +22,7 @@
 - `statics/`ディレクトリにCSSやJavaScriptのファイルを配置
 - `models/`ディレクトリにテーブルの定義を記述していく
   - テーブルを追加する際には`articles.py`を参考にするとよい 
+
+### 発展
+
+- 外部パッケージを導入したいときは`docker/fastapi/requirements.txt`に追記していく
