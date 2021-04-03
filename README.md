@@ -4,6 +4,9 @@
 
 講義内での指示に従ってDockerのインストールを完了させておくこと
 
+- [Windowsの場合]*(install-docker-windows.md)
+- [Macの場合]*(install-docker-windows.md)
+
 ## 実行方法
 
 - Webアプリ
