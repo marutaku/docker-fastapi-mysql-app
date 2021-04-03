@@ -15,12 +15,12 @@
 3. ダウンロードされたファイルをクリックして起動
 
 4. インストールの開始，設定などには手を加えず，次に進んでいく
-  - もし下記の画面になったら[Windows Updateが必要な場合](#Windows Updateが必要な場合に進む)
+  - もし下記の画面になったら[Windows Updateが必要な場合](#Windows-Updateが必要な場合)に進む
 
 <img width="1200" alt="install failed" src="images/docker_install_failed.png">
 
 5. インストール完了
-  - もし下記の画面が出たら[WSL2の更新が必要な場合](#WSL2の更新が必要な場合に進む)
+  - もし下記の画面が出たら[WSL2の更新が必要な場合](#WSL2の更新が必要な場合)に進む
   <img width="1200" alt="wsl update" src="images/wsl2_done_restart.png">
 
 4. Docker Desktopの起動
@@ -30,8 +30,8 @@
 ## インストールの確認
 
 ### 1. 下記のどちらかでコマンドプロンプトを起動
-- 「Windowsキー」押して「cmd」と入力して「Enter」を押して起動
-- 「Windowsキー」押して「コマンドプロンプト」を検索して起動
+- 「Windowsキー」を押して「cmd」と入力して「Enter」を押して起動
+- 「Windowsキー」を押して「コマンドプロンプト」を検索して起動
 
 ### 2. コマンドで確認( *$は入力しなくて良い* )
 
@@ -79,9 +79,7 @@ $ cd docker-fastapi-mysql-app
 $ docker-compose up
 ```
 
-*注意*
-
-初回はかなり時間がかかるので，下記のログが出力されるまではしばらく待機
+*注意* 初回はかなり時間がかかるので，下記のログが出力されるまではしばらく待機
 
 <img width="1200" alt="initail data log" src="images/mysql-initialize.png">
 
@@ -91,7 +89,7 @@ $ docker-compose up
 
 ## 動作確認
 
-1. 起動中に`https://localhost:8080` にアクセス
+1. 起動中に`https://localhost:8000` にアクセス
 2. 下記の画面が表示されれば完了
 
 <img width="1200" alt="toppage" src="images/toppage.png">
