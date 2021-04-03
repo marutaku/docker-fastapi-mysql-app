@@ -24,14 +24,14 @@ Apple シリコンであることを講義スタッフに伝える
 1. [Docker Desktop](https://www.docker.com/products/docker-desktop)にアクセス
 
 2. Download for Macをクリック
-<img width="1200" alt="Docker Desktop Mac" src="images/docker-desktop-page-mac.png">
+<img width="600" alt="Docker Desktop Mac" src="images/docker-desktop-page-mac.png">
 
 3. ダウンロードされたファイルをクリックして起動
 
 4. Applicationsフォルダに移動
 
 ドラッグ&ドロップで移動する．完了したらウィンドウは閉じて良い
-<img width="1200" alt="Docker mac drag and drop" src="images/drag-and-drop.png">
+<img width="600" alt="Docker mac drag and drop" src="images/drag-and-drop.png">
 
 4. 起動
 
@@ -54,7 +54,7 @@ $ docker-compose -verison
 
 出力例(Windowsの例なので出力が合っていれば良い)
 
-<img width="1200" alt="cmd.png" src="images/version.png">
+<img width="600" alt="cmd.png" src="images/version.png">
 
 ## 必要なファイルを準備
 
@@ -95,7 +95,7 @@ $ docker-compose up
 
 初回はかなり時間がかかるので，下記のログが出力されるまではしばらく待機
 
-<img width="1200" alt="initail data log" src="images/mysql-initialize.png">
+<img width="600" alt="initail data log" src="images/mysql-initialize.png">
 
 ## 停止
 1. `docker-compose up` コマンドを実行したウィンドウで `Ctrl + c`
@@ -106,5 +106,5 @@ $ docker-compose up
 1. 起動中に`https://localhost:8000` にアクセス
 2. 下記の画面が表示されれば完了
 
-<img width="1200" alt="toppage" src="images/toppage.png">
+<img width="600" alt="toppage" src="images/toppage.png">
 
