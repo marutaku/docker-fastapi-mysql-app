@@ -4,8 +4,10 @@
 
 「このMacについて」を開き，CPUを確認する．下記のどちらに当てはまるかを確認して進む
 
-- Intelの場合[インテルの場合](image/intel.png) 
-- Apple シリコンの場合[Apple シリコン搭載の Mac コンピュータ](https://support.apple.com/ja-jp/HT211814) 
+- Intelの場合は下記の画像  
+  <img width="1200" alt="インテルの場合" src="images/intel.png">
+- Apple シリコンの場合は下記のリンク  
+  [Apple シリコン搭載の Mac コンピュータ](https://support.apple.com/ja-jp/HT211814) 
 
 ### Intelの場合
 
@@ -19,10 +21,7 @@ Apple シリコンであることを講義スタッフに伝える
 
 ## Dockerのダウンロード
 
-1. Docker Desktopにアクセス
-
-[Docker Desktop](https://www.docker.com/products/docker-desktop)
-
+1. [Docker Desktop](https://www.docker.com/products/docker-desktop)にアクセス
 
 2. Download for Macをクリック
 <img width="1200" alt="Docker Desktop Mac" src="images/docker-desktop-page-mac.png">
@@ -55,7 +54,7 @@ $ docker-compose -verison
 
 出力例(Windowsの例なので出力が合っていれば良い)
 
-<img width="1200" alt="confirm-docker-installed.png" src="https://qiita-image-store.s3.amazonaws.com/0/355869/fb2375cb-0ef2-13d0-5235-203ef4b59af5.png">
+<img width="1200" alt="cmd.png" src="images/cmd.png">
 
 ## 必要なファイルを準備
 
@@ -96,7 +95,7 @@ $ docker-compose up
 
 初回はかなり時間がかかるので，下記のログが出力されるまではしばらく待機
 
-<img width="1200" alt="initail data log" src="image/mysql-initialize.png">
+<img width="1200" alt="initail data log" src="images/mysql-initialize.png">
 
 ## 停止
 1. `docker-compose up` コマンドを実行したウィンドウで `Ctrl + c`
@@ -107,5 +106,5 @@ $ docker-compose up
 1. 起動中に`https://localhost:8080` にアクセス
 2. 下記の画面が表示されれば完了
 
-<img width="1200" alt="toppage" src="image/toppage.png">
+<img width="1200" alt="toppage" src="images/toppage.png">
 

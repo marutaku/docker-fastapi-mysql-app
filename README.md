@@ -5,7 +5,7 @@
 講義内での指示に従ってDockerのインストールを完了させておくこと
 
 - [Windowsの場合](docs/install-docker-windows.md)
-- [Macの場合](docs/install-docker-windows.md)
+- [Macの場合](docs/install-docker-mac.md)
 
 ## 実行方法
 
