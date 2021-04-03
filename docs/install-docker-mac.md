@@ -47,6 +47,7 @@ $ docker-compose -verison
 ```
 
 出力例(Windowsの例なので出力が合っていれば良い)
+
 <img width="600" alt="cmd.png" src="images/version.png">
 
 ## 必要なファイルを準備
