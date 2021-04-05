@@ -95,7 +95,7 @@ $ docker-compose -verison
 
 ## 動作確認
 
-1. 起動中に`https://localhost:8000` にアクセス
+1. 起動中に~~`https://localhost:8000`~~ `http://localhost:8000` にアクセス
 
 2. 下記の画面が表示されれば完了
   <img width="600" alt="toppage" src="images/toppage.png">
