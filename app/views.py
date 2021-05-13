@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Form, Cookie
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from starlette.status import HTTP_302_FOUND
+from fastapi.staticfiles import StaticFiles
 from app.configs import Config
 from app.utilities.session import Session
 from app.models.auth import AuthModel
@@ -9,6 +10,7 @@ from app.models.articles import ArticleModel
 from app.utilities.check_login import check_login
 
 app = FastAPI()
+app.mount("/app/statics", StaticFiles(directory="app/statics"), name="static")
 templates = Jinja2Templates(directory="/app/templates")
 config = Config()
 session = Session(config)
