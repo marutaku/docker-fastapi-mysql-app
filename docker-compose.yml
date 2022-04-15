@@ -3,6 +3,7 @@ services:
   mysql:
     build:
       context: ./docker/mysql
+    platform: 'linux/amd64'
     volumes:
       - ./docker/mysql/sqls/initdb.d:/docker-entrypoint-initdb.d
       - ./docker/mysql/log/:/var/log/mysql
