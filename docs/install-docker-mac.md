@@ -65,7 +65,7 @@ $ docker-compose -verison
   ```bash
   $ cd
   $ cd Desktop
-  $ cd docker-fastapi-mysql-app
+  $ cd docker-fastapi-mysql-app-master
   ```
 2. Dockerコンテナ起動( *$は入力しなくて良い* )
   ```bash
