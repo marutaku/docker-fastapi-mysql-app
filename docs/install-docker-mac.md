@@ -9,21 +9,12 @@
 - Apple シリコンの場合は下記のリンク  
   [Apple シリコン搭載の Mac コンピュータ](https://support.apple.com/ja-jp/HT211814) 
 
-### Intelの場合
-
-[Dockerのダウンロード](#Dockerのダウンロード)に進む
-
-### Apple シリコンの場合
-
-Apple シリコンであることを講義スタッフに伝える
-
-参考：[Apple Silicon 技術プレビュー](https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/apple-m1/)2021/3/31時点
 
 ## Dockerのダウンロード
 
 1. [Docker Desktop](https://www.docker.com/products/docker-desktop)にアクセス
-2. Download for Macをクリック
-  <img width="600" alt="Docker Desktop Mac" src="images/docker-desktop-page-mac.png">
+2. Intelの場合はMac with Intel Chip、Apple シリコンの場合はMac with Apple Chipをクリック
+  <img width="600" alt="Docker Desktop Mac" src="https://raw.githubusercontent.com/KuroiCc/kuroi-image-host/main/images/20220219111938.png">
 3. ダウンロードされたファイルをクリックして起動
 4. Applicationsフォルダに移動
   - ドラッグ&ドロップで移動する．完了したらウィンドウは閉じて良い
