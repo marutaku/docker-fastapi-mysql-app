@@ -44,7 +44,7 @@ $ docker-compose -verison
 ## 必要なファイルを準備
 
 1. 以下のリンクから環境構築に使うファイルをダウンロードする
-    * https://github.com/marutaku/docker-fastapi-mysql-app
+    * https://github.com/KuroiCc/docker-fastapi-mysql-app
     * 右の方にある緑色の Clone or download ボタンから ZIP を選択
    <img width="1200" alt="Download zip" src="images/clone-zip.png">
 2. zip ファイルを*デスクトップ*に移動
