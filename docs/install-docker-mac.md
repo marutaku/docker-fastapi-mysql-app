@@ -34,7 +34,7 @@
 ### 2. コマンドで確認( *$は入力しなくて良い* )
 ```bash
 $ docker --version
-$ docker-compose -verison
+$ docker-compose --version
 ```
 
 出力例(Windowsの例なので出力が合っていれば良い)
