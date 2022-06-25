@@ -102,8 +102,7 @@ def post_article(title: str = Form(...), body: str = Form(...), image: UploadFil
     if image:
         suffix = Path(image.filename).suffix
         fileobj = image.file
-        upload_dir_format = 'statics/images/' + str(time.time())
-        
+        upload_dir_format = '/images/' + str(time.time())
         # ios画像対応しない場合はここいらない
         if suffix == '.heic' or suffix == '.HEIC':
             heif_file = pyheif.read(fileobj)
@@ -116,10 +115,10 @@ def post_article(title: str = Form(...), body: str = Form(...), image: UploadFil
                 heif_file.stride,
             )
             upload_dir_path = upload_dir_format + '.jpeg'
-            data.save('app/' + upload_dir_path, "JPEG")
+            data.save('app/statics' + upload_dir_path, "JPEG")
         else:
             upload_dir_path = upload_dir_format + suffix
-            with open('app/' + upload_dir_path,'wb+') as f:
+            with open('app/statics' + upload_dir_path,'wb+') as f:
                 shutil.copyfileobj(fileobj, f)
 
     article_model = ArticleModel(config)
@@ -127,14 +126,11 @@ def post_article(title: str = Form(...), body: str = Form(...), image: UploadFil
     article_model.create_article(user_id, title, body, upload_dir_path)
     return RedirectResponse("/articles", status_code=HTTP_302_FOUND)
 
-
-@app.post("/article/create")
+@app.get("/article/create")
 @check_login
-def post_article(title: str = Form(...), body: str = Form(...), session_id=Cookie(default=None)):
-    article_model = ArticleModel(config)
-    user_id = session.get(session_id).get("user").get("id")
-    article_model.create_article(user_id, title, body)
-    return RedirectResponse("/articles", status_code=HTTP_302_FOUND)
+def create_article_page(request: Request, session_id=Cookie(default=None)):
+    user = session.get(session_id).get("user")
+    return templates.TemplateResponse("create-article.html", {"request": request, "user": user})
 
 
 @app.get("/article/{article_id}")
