@@ -6,5 +6,6 @@
             <i>投稿者: {{ article["username"] }}</i>
         </p>
         <p>{{ article["body"] }}</p>
+        <img scr="{{url_for('static', path=article['image_path'])}}">
     </div>
 {% endblock %}
